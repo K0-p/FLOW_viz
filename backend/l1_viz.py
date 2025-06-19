@@ -19,18 +19,31 @@ def frame_viz(frames, coors):
     cnt = 0
     for frame in frames:
 
-        # Set the random seed based on L/R
+        # Old frame algo
+
+                  #  # Set the random seed based on L/R
+                  #  random.seed(frame.left_right)
+                  #  # Generate 800 unique random (x, y) pairs
+                  #  unique_pairs = set()
+
+                  #  # Keep generating until we have 800 unique pairs
+                  #  while len(unique_pairs) < 800:
+                  #      x, y = random.randint(1, 248), random.randint(1, 248)
+                  #      unique_pairs.add((x, y))
+
+                  #  # Convert the set to a list for easier access
+                  #  pairs = list(unique_pairs)
+
         random.seed(frame.left_right)
-        # Generate 800 unique random (x, y) pairs
-        unique_pairs = set()
+        unique_values = random.sample(range(1, 248), 57)
 
-        # Keep generating until we have 800 unique pairs
-        while len(unique_pairs) < 800:
-            x, y = random.randint(1, 248), random.randint(1, 248)
-            unique_pairs.add((x, y))
-
-        # Convert the set to a list for easier access
-        pairs = list(unique_pairs)
+        # Create pairings by matching vals 1-10 with 11-18
+        pairs = []
+        for i in range(25):
+            x = unique_values[i]
+            for z in range(25, 57):
+                y = unique_values[z]
+                pairs.append((x, y))
 
         # Create the gradient
         gradient = cairo.LinearGradient(0, 0, 0, height)

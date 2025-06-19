@@ -3,7 +3,7 @@ from backend.layer1 import l1_collect
 from backend.l1_viz import frame_viz, make_gif, from_gif
 from backend.to_FLOW import w_FLOW
 from backend.from_FLOW import readFLOW
-from layer_2 import get_top_tags, client
+from backend.layer_2 import get_top_tags, client
 import os
 
 i_song = "you suffer"
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     img_dir = "backend/l1_img"  # Replace with your folder path
 
     # get mp3 file
-    getYouTube(i_song, i_artist)
+                # getYouTube(i_song, i_artist)
     input_mp3_file = 'backend/scraped.mp3'  # Update this path if needed
 
     # handle output file if exists
@@ -44,10 +44,20 @@ if __name__ == '__main__':
 
     tags = get_top_tags(i_song, i_artist)
     colors = client(i_song, i_artist)
-    print(colors)
+    print("colors: " + str(colors))
 
     # Remove backticks and clean the string
     cleaned_colors = [color.strip('`') for color in colors]
+    print("clean 1: " + str(cleaned_colors))
+
+    # Remove additional potential junk chars
+    final_colors = []
+    for c in cleaned_colors:
+        if c.find('#') !=-1 :
+            c = c[c.find('#'):]
+            final_colors.append(c)
+    cleaned_colors = final_colors
+    print("clean 2: " + str(cleaned_colors))
 
     # Convert to RGB correctly
     rgb_colors = [

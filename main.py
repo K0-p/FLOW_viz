@@ -21,7 +21,7 @@ if __name__ == '__main__':
     img_dir = "backend/l1_img"  # Replace with your folder path
 
     # get mp3 file
-                # getYouTube(i_song, i_artist)
+    getYouTube(i_song, i_artist)
     input_mp3_file = 'backend/scraped.mp3'  # Update this path if needed
 
     # handle output file if exists

@@ -3,11 +3,13 @@ import ffmpeg
 import numpy as np
 
 # importing packages
-from pytubefix import YouTube
+#from pytubefix import YouTube
 import os
 from youtube_search import YoutubeSearch
 
 def scrape(song):
+  print("skipping scrape")
+  return
   # handle output file if exists
   output_file = 'backend/scraped.mp3'
   try:
@@ -38,6 +40,8 @@ def getYouTube(song, artist):
     scrape('https://www.youtube.com' + v['url_suffix'])
 
 def change_sample_rate(input_file, output_file, sample_rate):
+    print("Current path: ", os.getcwd())
+    print(f"Changing sample rate of {input_file} to {sample_rate} Hz and saving to {output_file}")
     try:
       subprocess.run(['ffmpeg', '-i', input_file, '-ar', str(sample_rate), output_file], check=True,stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
       print(f"Successfully converted {input_file} to {output_file} with sample rate {sample_rate} Hz")
